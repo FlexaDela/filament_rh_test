@@ -52,12 +52,6 @@ class WorkerForm
                 ->regex('')
                 ->required(),
 
-                TextInput::make('rg')
-                ->label('RG')
-                ->unique('worker', 'rg')
-                ->maxLength(20)
-                ->required(),
-
                 Select::make('uf')
                 ->label('UF')
                 ->options(Uf::class)

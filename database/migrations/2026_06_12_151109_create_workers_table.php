@@ -17,10 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender', 1);
             $table->date('birth_day');
-            $table->string('cpf',14)->unique();
-            $table->string('rg')->unique();
+            $table->string('cpf',11)->unique();
             $table->string('uf', 2);
-            //$table->string('municipality');
             $table->string('education');
 
             $table->string('gender_identity')->nullable();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('unity_siacs', function (Blueprint $table) {
              $table->id();
-            $table->string('neighborhood');
+            $table->string('neighborhood')->unique();
             $table->string('street');
             $table->string('cep');
             $table->timestamps();
