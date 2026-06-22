@@ -36,7 +36,7 @@ class WorkerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AddresRelationManager::class,
+
         ];
     }
 

@@ -10,6 +10,7 @@ use App\Models\UnitySiac;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
@@ -24,7 +25,6 @@ class WorkerForm
             ->components([
                 Tabs::make('Tabs')
                 ->tabs([
-
                     Tab::make('Worker')
                     ->icon(Heroicon::User)
                     ->schema([
@@ -59,8 +59,8 @@ class WorkerForm
 
                         TextInput::make('cpf')
                         ->label('CPF')
+                        ->unique(ignoreRecord: true)
                         ->mask('999.999.999-99')
-                        ->unique('worker','cpf')
                         ->required(),
 
                         Select::make('uf')
@@ -83,36 +83,43 @@ class WorkerForm
 
                     Tab::make('Addres')
                     ->icon(Heroicon::MapPin)
+                    ->label('Endereço')
                     ->schema([
-                        TextInput::make('cep')
-                        ->placeholder('00000-000')
-                        ->mask('99999-999')
-                        ->required()
-                        ->label('CEP'),
+                        Fieldset::make('Dados Residenciais')
+                        ->relationship('addres')
+                        ->columnSpanFull()
+                        ->columns(4)
+                        ->schema([
+                            TextInput::make('cep')
+                            ->placeholder('00000-000')
+                            ->mask('99999-999')
+                            ->required()
+                            ->label('CEP'),
 
-                        TextInput::make('street')
-                        ->required()
-                        ->placeholder('Av. Resenha das ideias')
-                        ->label('Rua'),
+                            TextInput::make('street')
+                            ->required()
+                            ->placeholder('Av. Resenha das ideias')
+                            ->label('Rua'),
 
-                        TextInput::make('neighborhood')
-                        ->label('Bairro')
-                        ->placeholder('Centro')
-                        ->required(),
+                            TextInput::make('neighborhood')
+                            ->label('Bairro')
+                            ->placeholder('Centro')
+                            ->required(),
 
-                        TextInput::make('type_of_residence')
-                        ->required()
-                        ->placeholder('Casa, apartamento ou condominio')
-                        ->label('Tipo de residencia'),
+                            TextInput::make('type_of_residence')
+                            ->required()
+                            ->placeholder('Casa, apartamento ou condominio')
+                            ->label('Tipo de residencia'),
 
-                        TextInput::make('house_number')
-                        ->placeholder('1234')
-                        ->required()
-                        ->label('Numero da residencia')
+                            TextInput::make('house_number')
+                            ->placeholder('1234')
+                            ->required()
+                            ->label('Numero da residencia')
+                        ])
                     ])
 
                 ])
-                ->columns(3)
+                ->columns(2)
             ]);
     }
 }

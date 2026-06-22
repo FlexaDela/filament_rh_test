@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Addres;
+use App\Models\UnitySiac;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -22,8 +25,13 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-     $this->call([
-        UnitySiacSeeder::class
-     ]);
+        UnitySiac::factory(10)
+        ->has(
+            Worker::factory()
+            ->count(7)
+            ->has(
+                Addres::factory()))
+            ->create();
+
     }
 }
