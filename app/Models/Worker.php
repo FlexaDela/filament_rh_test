@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Worker extends Model
 {
@@ -21,7 +22,6 @@ class Worker extends Model
         'gender',
         'birth_day',
         'cpf',
-        'rg',
         'uf',
         'education',
         'gender_identity',
@@ -52,5 +52,10 @@ class Worker extends Model
     public function unitySiac(): BelongsTo
     {
         return $this->belongsTo(UnitySiac::class);
+    }
+
+    public function addres(): HasOne
+    {
+        return $this->hasOne(Addres::class);
     }
 }

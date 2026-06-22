@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Workers\Tables;
 
 use Dom\Text;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -29,6 +30,12 @@ class WorkersTable
                 TextColumn::make('birth_day')
                 ->label('Data de aniversario')
                 ->date()
+            ])
+            ->emptyStateActions([
+                Action::make('create')
+                ->label('Criar servidor')
+                ->icon('heroicon-m-plus')
+                ->button(),
             ])
             ->filters([
                 //

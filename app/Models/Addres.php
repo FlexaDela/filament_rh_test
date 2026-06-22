@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Address extends Model
+class Addres extends Model
 {
     protected $fillable = [
         'street',
         'neighborhood',
         'cep',
-        'type of residenc',
+        'type_of_residence',
         'house_number'
     ];
 

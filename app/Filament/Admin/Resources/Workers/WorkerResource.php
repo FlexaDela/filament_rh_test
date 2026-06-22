@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Workers;
 use App\Filament\Admin\Resources\Workers\Pages\CreateWorker;
 use App\Filament\Admin\Resources\Workers\Pages\EditWorker;
 use App\Filament\Admin\Resources\Workers\Pages\ListWorkers;
+use App\Filament\Admin\Resources\Workers\RelationManagers\AddresRelationManager;
 use App\Filament\Admin\Resources\Workers\Schemas\WorkerForm;
 use App\Filament\Admin\Resources\Workers\Tables\WorkersTable;
 use App\Models\Worker;
@@ -35,7 +36,7 @@ class WorkerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddresRelationManager::class,
         ];
     }
 

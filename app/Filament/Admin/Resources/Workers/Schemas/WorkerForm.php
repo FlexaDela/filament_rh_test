@@ -10,64 +10,109 @@ use App\Models\UnitySiac;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class WorkerForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
-                TextInput::make('name')
-                ->label('Nome')
-                ->required(),
+                Tabs::make('Tabs')
+                ->tabs([
 
-                Select::make('gender')
-                ->label('Sexualidade')
-                ->options(Gender::class)
-                ->required()
-                ->name(false),
+                    Tab::make('Worker')
+                    ->icon(Heroicon::User)
+                    ->schema([
+                        TextInput::make('name')
+                        ->label('Nome')
+                        ->required(),
 
-                TextInput::make('email')
-                ->label('Email')
-                ->email()
-                ->required(),
+                        Select::make('gender')
+                        ->label('Genero')
+                        ->options(Gender::class)
+                        ->required()
+                        ->native(false),
 
-                Select::make('unity_siac_id')
-                ->label('Unidade')
-                ->relationship(name: 'unitySiac', titleAttribute: 'neighborhood')
-                ->searchable()
-                ->preload()
-                ->required(),
+                        TextInput::make('email')
+                        ->label('Email')
+                        ->email()
+                        ->required(),
 
-                DatePicker::make('birth_day')
-                ->label('Data de nascimento')
-                ->format('d/m/Y')
-                ->required(),
+                        Select::make('unity_siac_id')
+                        ->label('Unidade')
+                        ->relationship(name: 'unitySiac', titleAttribute: 'neighborhood')
+                        ->searchable()
+                        ->preload()
+                        ->required(),
 
-                TextInput::make('cpf')
-                ->label('CPF')
-                ->placeholder('xxx.xxx.xxx-xx')
-                ->unique('worker','cpf')
-                ->regex('')
-                ->required(),
+                        DatePicker::make('birth_day')
+                        ->label('Data de nascimento')
+                        ->native(false)
+                        ->displayFormat('d/m/Y')
+                        ->format('d/m/Y')
+                        ->required(),
 
-                Select::make('uf')
-                ->label('UF')
-                ->options(Uf::class)
-                ->required(),
+                        TextInput::make('cpf')
+                        ->label('CPF')
+                        ->mask('999.999.999-99')
+                        ->unique('worker','cpf')
+                        ->required(),
 
-                Select::make('education')
-                ->label('Nivel de escolaridade')
-                ->options(Education::class)
-                ->required(),
+                        Select::make('uf')
+                        ->label('UF')
+                        ->options(Uf::class)
+                        ->required(),
 
-                Select::make('gener_identity')
-                ->label('Identidade de genero')
-                ->options(GenderIdentity::class),
+                        Select::make('education')
+                        ->label('Nivel de escolaridade')
+                        ->options(Education::class)
+                        ->required(),
 
-                TextInput::make('social_name')
-                ->label('Nome social'),
+                        Select::make('gender_identity')
+                        ->label('Identidade de genero')
+                        ->options(GenderIdentity::class),
+
+                        TextInput::make('social_name')
+                        ->label('Nome social'),
+                    ]),
+
+                    Tab::make('Addres')
+                    ->icon(Heroicon::MapPin)
+                    ->schema([
+                        TextInput::make('cep')
+                        ->placeholder('00000-000')
+                        ->mask('99999-999')
+                        ->required()
+                        ->label('CEP'),
+
+                        TextInput::make('street')
+                        ->required()
+                        ->placeholder('Av. Resenha das ideias')
+                        ->label('Rua'),
+
+                        TextInput::make('neighborhood')
+                        ->label('Bairro')
+                        ->placeholder('Centro')
+                        ->required(),
+
+                        TextInput::make('type_of_residence')
+                        ->required()
+                        ->placeholder('Casa, apartamento ou condominio')
+                        ->label('Tipo de residencia'),
+
+                        TextInput::make('house_number')
+                        ->placeholder('1234')
+                        ->required()
+                        ->label('Numero da residencia')
+                    ])
+
+                ])
+                ->columns(3)
             ]);
     }
 }
