@@ -20,6 +20,10 @@ class SectorResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $modelLabel = 'Setor';
+
+    protected static ?string $pluralLabel = 'Setores';
+
     public static function form(Schema $schema): Schema
     {
         return SectorForm::configure($schema);
