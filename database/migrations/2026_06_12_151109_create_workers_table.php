@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('unity_siac_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('name');
+            $table->foreignId('sector_id')->nullable()->constrained()->nullOnDelete();
+
+            $table->string('name')->unique();
             $table->string('gender', 1);
             $table->date('birth_day');
             $table->string('cpf',11)->unique();

@@ -50,6 +50,13 @@ class WorkerForm
                         ->preload()
                         ->required(),
 
+                        Select::make('sector_id')
+                        ->label('Setor')
+                        ->relationship(name:'sector', titleAttribute:'name')
+                        ->searchable()
+                        ->preload()
+                        ->required(),
+
                         DatePicker::make('birth_day')
                         ->label('Data de nascimento')
                         ->native(false)

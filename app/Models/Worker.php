@@ -58,4 +58,9 @@ class Worker extends Model
     {
         return $this->hasOne(Addres::class);
     }
+
+    public function sector(): BelongsTo
+    {
+        return $this->belongsTo(Sector::class);
+    }
 }

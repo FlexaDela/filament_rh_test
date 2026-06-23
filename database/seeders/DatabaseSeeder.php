@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Addres;
+use App\Models\Sector;
 use App\Models\UnitySiac;
 use App\Models\User;
 use App\Models\Worker;
@@ -25,13 +26,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
+        $sectors = Sector::factory()->count(5)->create();
+
         UnitySiac::factory(10)
         ->has(
             Worker::factory()
             ->count(7)
-            ->has(
-                Addres::factory()))
-            ->create();
+            ->recycle($sectors)
+            ->has(Addres::factory())
+        )
+        ->create();
 
     }
 }

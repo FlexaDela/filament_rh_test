@@ -7,6 +7,7 @@ use App\Enums\Education;
 use App\Enums\Gender;
 use App\Enums\GenderIdentity;
 use App\Enums\Uf;
+use App\Models\Sector;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,7 @@ class WorkerFactory extends Factory
     {
         return [
             'unity_siac_id' => UnitySiac::factory(),
+            'sector_id' => Sector::factory(),
             'name' => fake()->name(),
             'gender' => fake()->randomElement(Gender::cases())->value,
             'birth_day' => fake()->date('Y-m-d', '-18 years'),
