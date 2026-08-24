@@ -24,10 +24,18 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->sidebarCollapsibleOnDesktop() //adiciona opção de encolher sidebar formato de flecha
+            //->sidebarFullyCollapsibleOnDesktop()//Adiciona opção de fechar todos os icones
+            ->default() //não veio com a instalação
             ->id('admin')
             ->path('admin')
+            ->login() // não veio com a instalação
+            //->brandName('CRF Recursos Humanos')
+            ->brandLogo(asset('images/Logo_Flamengo_crest_1980-2018.png'))
+            ->favicon(asset('images/favicon.png'))
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Neutral,
+                'gray' => Color::Red
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\Filament\Admin\Pages')
